@@ -1,0 +1,40 @@
+# Sales Forecasting for a Global Food & Beverage Client
+
+Forecasting monthly sales using 5 years of data from Snowflake. Built time-series models with Python (Prophet), created Power BI dashboards with DAX, and automated data pipelines for real-time reporting.
+
+**Tools:** Python, SQL (Snowflake), Power BI, Excel
+
+# Sales Forecasting Notebook
+
+import pandas as pd
+from prophet import Prophet
+import snowflake.connector
+
+# Connect to Snowflake
+conn = snowflake.connector.connect(
+    user='YOUR_USERNAME',
+    password='YOUR_PASSWORD',
+    account='YOUR_ACCOUNT'
+)
+
+query = """
+SELECT sales_date, region, product_category, sales_amount
+FROM sales_data_table
+WHERE sales_date >= DATEADD(year, -5, CURRENT_DATE)
+"""
+
+df = pd.read_sql(query, conn)
+
+# Prepare data
+df['sales_date'] = pd.to_datetime(df['sales_date'])
+monthly_sales = df.groupby('sales_date')['sales_amount'].sum().reset_index()
+
+prophet_df = monthly_sales.rename(columns={'sales_date': 'ds', 'sales_amount': 'y'})
+
+model = Prophet()
+model.fit(prophet_df)
+
+future = model.make_future_dataframe(periods=12, freq='M')
+forecast = model.predict(future)
+
+model.plot(forecast)
