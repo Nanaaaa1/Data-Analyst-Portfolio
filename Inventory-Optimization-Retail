@@ -1,0 +1,9 @@
+import pandas as pd
+
+df = pd.read_csv('inventory_data.csv')
+
+df['inventory_turnover'] = df['cost_of_goods_sold'] / df['average_inventory']
+
+slow_movers = df[df['inventory_turnover'] < 2]
+
+print(f"Found {len(slow_movers)} slow moving items")
