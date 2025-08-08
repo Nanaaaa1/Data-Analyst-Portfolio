@@ -1,0 +1,13 @@
+import pandas as pd
+from sklearn.ensemble import IsolationForest
+
+df = pd.read_csv('sensor_data.csv')
+
+df['timestamp'] = pd.to_datetime(df['timestamp'])
+data = df[['energy_usage']]
+
+model = IsolationForest(contamination=0.01, random_state=42)
+df['anomaly'] = model.fit_predict(data)
+
+anomalies = df[df['anomaly'] == -1]
+print(f"Detected {len(anomalies)} anomalies")
