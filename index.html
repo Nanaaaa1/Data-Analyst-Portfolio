@@ -257,6 +257,44 @@
           </Section>
 
           {/* SQL Snippets */}
+          
+          {/* Python Segmentation Section */}
+          <Section id="python-segmentation" title="Python Project — Customer Segmentation (RFM + K‑Means)">
+            <div className="grid md:grid-cols-2 gap-6">
+              <Card>
+                <h3 className="font-medium">Overview</h3>
+                <p className="mt-2 text-sm text-gray-700">
+                  This project engineers RFM (Recency, Frequency, Monetary) features from order data and applies K‑Means to discover customer segments.
+                  Outputs include segment profiles and recommendations for targeted campaigns.
+                </p>
+                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                  <li>Feature engineering: Recency (days), Frequency (orders), Monetary (sales)</li>
+                  <li>Preprocessing: scaling, elbow + silhouette to choose K</li>
+                  <li>Deliverables: Segment profiles, retention actions</li>
+                </ul>
+              </Card>
+              <Card>
+                <h3 className="font-medium">Sample Notebook Snippet</h3>
+                <pre className="text-xs whitespace-pre-wrap break-words">{`import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+rfm = orders.groupby('Customer ID').agg(
+    Recency=('Order Date', lambda s: (orders['Order Date'].max() - s.max()).days),
+    Frequency=('Order ID', 'nunique'),
+    Monetary=('Sales', 'sum')
+).reset_index()
+
+X = StandardScaler().fit_transform(rfm[['Recency','Frequency','Monetary']])
+kmeans = KMeans(n_clusters=4, n_init='auto', random_state=42)
+rfm['Segment'] = kmeans.fit_predict(X)`}</pre>
+                <p className="mt-2 text-sm text-gray-700">
+                  Want the full notebook? Host it on GitHub and I’ll link it here.
+                </p>
+              </Card>
+            </div>
+          </Section>
+
           <Section id="sql-snippets" title="SQL Snippets">
             <Card>
               <pre className="text-sm whitespace-pre-wrap break-words">{`WITH churn_cohorts AS (
