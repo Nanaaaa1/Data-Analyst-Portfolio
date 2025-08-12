@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Analyst Portfolio and Insights — Nana Adu-Abankro</title>
+  <meta name="description" content="Data Analyst Portfolio and Insights — Dashboards in Tableau & Power BI, SQL & Python projects, case studies, and downloadable artifacts." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 text-gray-900">
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const PROFILE = {
+      name: "Nana Adu-Abankro",
+      title: "Data Analyst Portfolio and Insights",
+      location: "Main St, Houston, TX",
+      summary: "Data analyst focused on turning messy operational data into clear, decision-ready dashboards. I specialize in Excel, SQL, Power BI, Tableau, and Python—especially for contact center KPIs, customer experience, and process optimization.",
+      email: "nanaaduabankro@gmail.com",
+      phone: "(908) 425-2060",
+      links: {
+        linkedin: "#",
+        github: "#",
+        kaggle: "#",
+        resume: "files/resume.pdf", // keep this file next to index.html
+      },
+      // Clean Tableau /views/ URL
+      tableauViewsUrl: "https://public.tableau.com/views/Superstore_Dashboard_Nana/SuperstoreDashboard?:showVizHome=no&:embed=true&:tabs=no&:toolbar=yes&:language=en-US",
+      tableauOpenUrl: "https://public.tableau.com/views/Superstore_Dashboard_Nana/SuperstoreDashboard?:showVizHome=no&:language=en-US",
+      notebook: {
+        title: "Matplotlib Visualization Examples",
+        blurb: "A compact notebook demonstrating clean plotting patterns in Matplotlib for quick EDA: line charts, bar charts, histograms, and layout tips.",
+        ipynbPath: encodeURI("10.5-matplotlib (2).ipynb"), // keep this file next to index.html
+        renderedHtmlPath: null,
+        nbviewerUrl: null,
+      },
+    };
+
+    const Badge = ({ children }) => (
+      <span className="inline-flex items-center gap-2 rounded-2xl border px-3 py-1 text-sm shadow-sm">{children}</span>
+    );
+
+    const Card = ({ children }) => (
+      <div className="rounded-2xl border shadow-sm p-5 hover:shadow-md transition-shadow bg-white/70 backdrop-blur">
+        {children}
+      </div>
+    );
+
+    const Section = ({ id, title, children }) => (
+      <section id={id} className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-12">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-6">{title}</h2>
+        {children}
+      </section>
+    );
+
+    const NotebookBlock = ({ notebook }) => {
+      const { ipynbPath, renderedHtmlPath, nbviewerUrl, title, blurb } = notebook || {};
+      const hasEmbed = Boolean(renderedHtmlPath || nbviewerUrl);
+      return (
+        <div className="space-y-4">
+          <div className="grid md:grid-cols-12 gap-6 items-start">
+            <div className="md:col-span-6">
+              <Card>
+                <h3 className="font-medium">{title || "Python Project"}</h3>
+                <p className="mt-2 text-sm text-gray-700">{blurb || ""}</p>
+                <div className="mt-4 flex flex-wrap gap-3 text-sm">
+                  {ipynbPath && <a href={ipynbPath} download className="rounded-xl border px-4 py-2 hover:bg-gray-50">Download Notebook (.ipynb)</a>}
+                  {renderedHtmlPath && <a href={renderedHtmlPath} target="_blank" rel="noopener" className="rounded-xl border px-4 py-2 hover:bg-gray-50">Open Rendered HTML</a>}
+                  {nbviewerUrl && <a href={nbviewerUrl} target="_blank" rel="noopener" className="rounded-xl border px-4 py-2 hover:bg-gray-50">View on nbviewer</a>}
+                </div>
+              </Card>
+            </div>
+            <div className="md:col-span-6">
+              <Card>
+                {hasEmbed ? (
+                  <div className="w-full aspect-[16/10] rounded-lg overflow-hidden border">
+                    <iframe title="Notebook Preview" src={renderedHtmlPath || nbviewerUrl} className="w-full h-full" />
+                  </div>
+                ) : (
+                  <div className="text-sm text-gray-600">Embed preview will appear here once an HTML render or nbviewer URL is available. For now, use the download link.</div>
+                )}
+              </Card>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const PROJECTS = [
+      {
+        title: "Superstore Sales Performance (Tableau)",
+        period: "2025",
+        tagline: "Corporate dashboard with KPIs for Sales, Profit, Orders; map and top-10 analysis.",
+        stack: ["Tableau", "Data Modeling", "UX"],
+        highlights: [
+          "Built KPI cards with QoQ deltas",
+          "Interactive filters and drilldowns",
+          "Usage documentation"
+        ],
+        cta: { label: "View Live Dashboard", href: "#tableau" }
+      },
+      {
+        title: "Customer Segmentation (Python)",
+        period: "2025",
+        tagline: "RFM scoring + k-means clustering.",
+        stack: ["Python", "pandas", "scikit-learn", "matplotlib"],
+        highlights: [
+          "Engineered RFM features",
+          "K selection with elbow/silhouette",
+          "Segment profiles"
+        ],
+        cta: { label: "View Notebook", href: "#python-notebook" }
+      }
+    ];
+
+    function Portfolio() {
+      return (
+        <div>
+          {/* Header */}
+          <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b">
+            <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 h-16 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-2xl bg-gray-900 text-white grid place-items-center font-semibold">NA</div>
+                <div>
+                  <p className="font-medium leading-tight">{PROFILE.name}</p>
+                  <p className="text-xs text-gray-500 -mt-0.5">{PROFILE.title}</p>
+                </div>
+              </div>
+              <nav className="hidden md:flex items-center gap-6 text-sm">
+                <a href="#about" className="hover:underline">About</a>
+                <a href="#skills" className="hover:underline">Skills</a>
+                <a href="#projects" className="hover:underline">Projects</a>
+                <a href="#tableau" className="hover:underline">Tableau</a>
+                <a href="#python-notebook" className="hover:underline">Python</a>
+                <a href="#contact" className="hover:underline">Contact</a>
+              </nav>
+            </div>
+          </header>
+
+          {/* About */}
+          <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-12">
+            <div className="grid md:grid-cols-12 gap-8 items-center">
+              <div className="md:col-span-7">
+                <h1 className="text-3xl md:text-5xl font-semibold tracking-tight">{PROFILE.title}</h1>
+                <p className="mt-4 text-gray-600 md:text-lg max-w-2xl">{PROFILE.summary}</p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Badge>Excel</Badge><Badge>SQL</Badge><Badge>Python</Badge><Badge>Power BI</Badge><Badge>Tableau</Badge><Badge>Data Cleaning</Badge><Badge>Documentation</Badge>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a href={PROFILE.links.linkedin} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">LinkedIn</a>
+                  <a href={PROFILE.links.github} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">GitHub</a>
+                  <a href={PROFILE.links.kaggle} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">Kaggle</a>
+                  <a href={PROFILE.links.resume} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50" target="_blank" rel="noopener">Download Resume</a>
+                </div>
+              </div>
+              <div className="md:col-span-5">
+                <Card>
+                  <div className="text-sm text-gray-500">Profile</div>
+                  <div className="mt-2 grid grid-cols-2 gap-3 text-sm">
+                    <div className="text-gray-500">Name</div><div>{PROFILE.name}</div>
+                    <div className="text-gray-500">Location</div><div>{PROFILE.location}</div>
+                    <div className="text-gray-500">Email</div><div><a href={"mailto:" + PROFILE.email} className="underline">{PROFILE.email}</a></div>
+                    <div className="text-gray-500">Phone</div><div>{PROFILE.phone}</div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+          </section>
+
+          {/* Skills */}
+          <Section id="skills" title="Skills & Tooling">
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card>
+                <h3 className="font-medium">Data Prep & Modeling</h3>
+                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                  <li>Excel (Power Query, PivotTables, advanced formulas)</li>
+                  <li>SQL (joins, CTEs, window functions, data quality checks)</li>
+                  <li>Python (pandas, NumPy, data validation)</li>
+                </ul>
+              </Card>
+              <Card>
+                <h3 className="font-medium">Visualization & Reporting</h3>
+                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                  <li>Power BI (DAX, measures, drill-through)</li>
+                  <li>Tableau (parameters, actions, level of detail)</li>
+                  <li>Matplotlib for quick EDA visuals</li>
+                </ul>
+              </Card>
+              <Card>
+                <h3 className="font-medium">Domains & Impact</h3>
+                <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                  <li>Contact center KPIs (AHT, ASA, FCR, CSAT, SLA)</li>
+                  <li>Customer experience & churn insights</li>
+                  <li>Process improvement & SOPs</li>
+                </ul>
+              </Card>
+            </div>
+          </Section>
+
+          {/* Projects */}
+          <Section id="projects" title="Featured Projects">
+            <div className="grid md:grid-cols-2 gap-6">
+              {PROJECTS.map(p => (
+                <Card key={p.title}>
+                  <div className="text-xs text-gray-500">{p.period}</div>
+                  <h3 className="mt-1 text-lg font-semibold">{p.title}</h3>
+                  <p className="mt-2 text-sm text-gray-700">{p.tagline}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {p.stack.map(s => <span key={s} className="text-xs rounded-lg bg-gray-100 border px-2 py-0.5">{s}</span>)}
+                  </div>
+                  <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
+                    {p.highlights.map(h => <li key={h}>{h}</li>)}
+                  </ul>
+                  <a href={p.cta.href} className="inline-block mt-4 text-sm underline">{p.cta.label}</a>
+                </Card>
+              ))}
+            </div>
+          </Section>
+
+          {/* Tableau */}
+          <Section id="tableau" title="Tableau Showcase">
+            <p className="text-gray-600 mb-4">Embedded via Tableau Public. If it’s blocked, use the fallback link below.</p>
+            <div className="w-full aspect-[16/10] rounded-2xl overflow-hidden border">
+              <iframe
+                title="Tableau Visualization"
+                src={PROFILE.tableauViewsUrl}
+                className="w-full h-full"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <p className="mt-3 text-xs text-gray-500">
+              Fallback: <a className="underline" href={PROFILE.tableauOpenUrl} target="_blank" rel="noopener">Open on Tableau Public</a>.
+            </p>
+          </Section>
+
+          {/* Python Notebook Section */}
+          <Section id="python-notebook" title="Python Project — Notebook">
+            <NotebookBlock notebook={PROFILE.notebook} />
+          </Section>
+
+          {/* Contact */}
+          <Section id="contact" title="Contact & Links">
+            <Card>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-medium">Get in touch</h3>
+                  <p className="mt-2 text-sm text-gray-700">
+                    I’m open to remote or hybrid roles focused on reporting, dashboarding, and process improvement.
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-3 text-sm">
+                  <a href={"mailto:" + PROFILE.email} className="rounded-xl border px-4 py-2 hover:bg-gray-50">Email</a>
+                  <a href={PROFILE.links.linkedin} className="rounded-xl border px-4 py-2 hover:bg-gray-50">LinkedIn</a>
+                  <a href={PROFILE.links.github} className="rounded-xl border px-4 py-2 hover:bg-gray-50">GitHub</a>
+                  <a href={PROFILE.links.resume} className="rounded-xl border px-4 py-2 hover:bg-gray-50" target="_blank" rel="noopener">Download Resume</a>
+                </div>
+              </div>
+            </Card>
+          </Section>
+
+          <footer className="pb-12 text-center text-xs text-gray-500">© {new Date().getFullYear()} {PROFILE.name}. All rights reserved.</footer>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<Portfolio />);
+  </script>
+</body>
+</html>
