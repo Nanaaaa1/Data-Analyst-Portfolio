@@ -27,9 +27,8 @@
         kaggle: "#",
         resume: encodeURI("NANA ADU-ABANKRO_Data Analyst (1).pdf"),
       },
-      // Clean, reliable Tableau /views/ URL
-      tableauViewsUrl: "https://public.tableau.com/views/Superstore_Dashboard_Nana/SuperstoreDashboard?:showVizHome=no&:embed=true&:tabs=no&:toolbar=yes&:language=en-US",
-      tableauOpenUrl: "https://public.tableau.com/views/Superstore_Dashboard_Nana/SuperstoreDashboard?:showVizHome=no&:language=en-US",
+      tableauViewsUrl: "https://public.tableau.com/views/Superstore_Dashboard_Nana/SuperstoreDashboard?:showVizHome=no&:embed=y&:tabs=no&:toolbar=yes",
+      tableauOpenUrl: "https://public.tableau.com/views/Superstore_Dashboard_Nana/SuperstoreDashboard?:showVizHome=no",
       notebook: {
         title: "Matplotlib Visualization Examples",
         blurb: "A compact notebook demonstrating clean plotting patterns in Matplotlib for quick EDA: line charts, bar charts, histograms, and layout tips.",
@@ -143,75 +142,7 @@
           <section id="about" className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-12">
             <h1 className="text-3xl font-semibold">{PROFILE.title}</h1>
             <p className="mt-4 text-gray-600">{PROFILE.summary}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Badge>Excel</Badge><Badge>SQL</Badge><Badge>Python</Badge><Badge>Power BI</Badge><Badge>Tableau</Badge><Badge>Data Cleaning</Badge><Badge>Documentation</Badge>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={PROFILE.links.linkedin} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">LinkedIn</a>
-              <a href={PROFILE.links.github} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">GitHub</a>
-              <a href={PROFILE.links.kaggle} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50">Kaggle</a>
-              <a href={PROFILE.links.resume} className="rounded-xl border px-4 py-2 text-sm hover:bg-gray-50" target="_blank" rel="noopener">Download Resume</a>
-            </div>
           </section>
-
-          {/* Tableau (fixed) */}
-          <Section id="tableau" title="Tableau Showcase">
-            <p className="text-gray-600 mb-4">
-              Embedded via Tableau Public. If it’s blocked, use the fallback link below.
-            </p>
-            <div className="w-full aspect-[16/10] rounded-lg overflow-hidden border">
-              <iframe
-                title="Tableau Visualization"
-                src={PROFILE.tableauViewsUrl}
-                className="w-full h-full"
-                allowFullScreen
-              ></iframe>
-            </div>
-            <p className="mt-3 text-xs text-gray-500">
-              Fallback: <a className="underline" href={PROFILE.tableauOpenUrl} target="_blank" rel="noopener">Open on Tableau Public</a>.
-            </p>
-          </Section>
-
-          {/* (Optional) Projects list using PROJECTS */}
-          <Section id="projects" title="Featured Projects">
-            <div className="grid md:grid-cols-2 gap-6">
-              {PROJECTS.map(p => (
-                <Card key={p.title}>
-                  <div className="text-xs text-gray-500">{p.period}</div>
-                  <h3 className="mt-1 text-lg font-semibold">{p.title}</h3>
-                  <p className="mt-2 text-sm text-gray-700">{p.tagline}</p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {p.stack.map(s => <span key={s} className="text-xs rounded-lg bg-gray-100 border px-2 py-0.5">{s}</span>)}
-                  </div>
-                  <ul className="mt-3 space-y-2 text-sm text-gray-700 list-disc list-inside">
-                    {p.highlights.map(h => <li key={h}>{h}</li>)}
-                  </ul>
-                  <a href={p.cta.href} className="inline-block mt-4 text-sm underline">{p.cta.label}</a>
-                </Card>
-              ))}
-            </div>
-          </Section>
-
-          {/* Contact */}
-          <Section id="contact" title="Contact & Links">
-            <Card>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-medium">Get in touch</h3>
-                  <p className="mt-2 text-sm text-gray-700">
-                    I’m open to remote or hybrid roles focused on reporting, dashboarding, and process improvement.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3 text-sm">
-                  <a href={"mailto:" + PROFILE.email} className="rounded-xl border px-4 py-2 hover:bg-gray-50">Email</a>
-                  <a href={PROFILE.links.linkedin} className="rounded-xl border px-4 py-2 hover:bg-gray-50">LinkedIn</a>
-                  <a href={PROFILE.links.github} className="rounded-xl border px-4 py-2 hover:bg-gray-50">GitHub</a>
-                </div>
-              </div>
-            </Card>
-          </Section>
-
-          <footer className="pb-12 text-center text-xs text-gray-500">© {new Date().getFullYear()} {PROFILE.name}. All rights reserved.</footer>
         </div>
       );
     }
